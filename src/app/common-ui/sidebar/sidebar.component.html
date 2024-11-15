@@ -1,1 +1,63 @@
-<p>sidebar works!</p>
+<img
+  src="/assets/svg/logo-small.svg"
+  alt="logo"
+  class="ml16 mb20"
+>
+
+<nav class="mb20">
+  <ul class="main-menu-list">
+    @for ( menuitem of menuItems; track menuitem)   {
+      <li>
+        <a
+          class="menu-item"
+          [routerLink]="[menuitem.link]"
+          routerLinkActive="active"
+        >
+          <svg [icon]="menuitem.icon"></svg>
+          <span>{{ menuitem.label }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
+
+<p class="medium-text mt20 mb20">
+  Подписчики
+</p>
+
+@for ( subscriber of subscribers$ | async; track subscriber.id) {
+  <app-subscriber-card
+    [profile]="subscriber"
+  ></app-subscriber-card>
+}
+
+<div class="to-subscribers mt20">
+  <a
+    class="to-subscribers-link medium-text"
+    [routerLink]="['/subscribers']"
+  >Все подписчики</a>
+  <svg icon="arrow" class="to-subscribers-icon"></svg>
+</div>
+
+<footer class="sidebar__footer">
+  @if (me(); as me) {
+    @if (me.avatarUrl) {
+      <img
+        class="avatar-footer"
+        [src]="me.avatarUrl | imgUrl"
+        [alt]="me.lastName"
+      >
+    } @else {
+      <img
+        class="avatar-placeholder"
+        src="/assets/images/avatar-placeholder.png"
+        alt="avatar"
+      >
+    }
+    <div class="medium-text username-text">{{ me.username }}</div>
+    <a [routerLink]="['settings']" class="settings-btn">
+      <svg icon="settings" class="settings-icon"></svg>
+    </a>
+  }
+</footer>
+

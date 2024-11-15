@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'fonts';
-//@import 'margins';
+@import 'margins';
 
 :root {
   --primary-color: #AE7AFF;
@@ -13,7 +13,8 @@
   --border-color: #d4d9de;
   --light-color: #f8f9fa;
   --light-transparent-color: rgba(255, 255, 255, 0.75);
-  --dark-color: #343a40;
+  --dark-color: #000000;
+  --grey-color: #5F646D;
   --dark-hover-color: #414242;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -32,8 +33,8 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #333 inset !important; /* Темный фон */
-    box-shadow: 0 0 0px 1000px #333 inset !important;
+    -webkit-box-shadow: 0 0 0 1000px #333 inset !important; /* Темный фон */
+    box-shadow: 0 0 0 1000px #333 inset !important;
     -webkit-text-fill-color: #fff !important;                 /* Белый текст */
   }
 }
@@ -47,8 +48,8 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* Задаем нужный цвет фона */
-  box-shadow: 0 0 0px 1000px #343a40 inset !important;         /* Для браузеров, поддерживающих стандартный box-shadow */
+  -webkit-box-shadow: 0 0 0 1000px white inset !important; /* Задаем нужный цвет фона */
+  box-shadow: 0 0 0 1000px #343a40 inset !important;         /* Для браузеров, поддерживающих стандартный box-shadow */
   -webkit-text-fill-color: #f8f9fa !important;                 /* Задаем цвет текста */
 }
 
@@ -65,7 +66,7 @@ body {
   font-family: 'JetBrains Mono', sans-serif;
   font-size: 16px;
   color: var(--light-color);
-  background-image: url(/assets/images/background-fullhd.jpg);
+  background-image: url('/assets/images/background-fullhd.jpg');
 }
 
 .skill-tag {
@@ -82,7 +83,7 @@ body {
 .btn {
   width: 100%;
   background: var(--primary-color);
-  border: none;
+  border: 1px solid var(--dark-color);
   color: var(--dark-color);
   padding: 8px 16px;
   font-weight: 700;
@@ -102,7 +103,7 @@ body {
     right: -4px;
     width: 100%;
     height: 100%;
-    background: var(--secondary-color);
+    background: var(--grey-color);
     z-index: -1;
   }
 }
@@ -133,7 +134,7 @@ body {
 }
 
 .tt-control-label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   line-height: 16px;
   display: block;

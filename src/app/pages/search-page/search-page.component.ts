@@ -18,7 +18,7 @@ export class SearchPageComponent {
   profiles: Profile[] = [];
 
   constructor() {
-    this.profileService.getTestAccount().subscribe((profiles) => {
+    this.profileService.getTestAccounts().subscribe((profiles) => {
       this.profiles = profiles;
     })
   }
