@@ -13,7 +13,9 @@
           [routerLink]="[menuitem.link]"
           routerLinkActive="active"
         >
-          <svg [icon]="menuitem.icon"></svg>
+          <svg class="svg-menu-item"
+               [icon]="menuitem.icon"
+          ></svg>
           <span>{{ menuitem.label }}</span>
         </a>
       </li>

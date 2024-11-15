@@ -38,15 +38,15 @@
   }
 }
 
-.menu-item svg {
-  width: 16px;
-  height: 16px;
+.svg-menu-item {
+  width: var(--svg-icon-width, 18px);
+  height: var(--svg-icon-height, 18px);
   fill: var(--light-color);
   transition: transform 0.3s ease;
 }
 
-.menu-item:hover svg,
-.menu-item:focus-visible svg {
+.menu-item:hover .svg-menu-item,
+.menu-item:focus-visible .svg-menu-item {
   fill: var(--primary-color);
   transform: scale(1.5);
 }
