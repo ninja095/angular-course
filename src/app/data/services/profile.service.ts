@@ -53,9 +53,9 @@ export class ProfileService {
       )
   }
 
-  getFilteredProfiles(filters: Record<string, any>) {
+  getFilteredProfiles(params: Record<string, any>) {
     return this.http.get<Pageble<Profile>>(
-      `${this.baseUrl}account/accounts`,{ params: filters })
+      `${this.baseUrl}account/accounts`,{ params })
       .pipe(
         tap((response) => this.filteredProfiles.set(response.items)),
       );
