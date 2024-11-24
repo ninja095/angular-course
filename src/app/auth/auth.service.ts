@@ -68,5 +68,4 @@ export class AuthService {
     this.cookieService.deleteAll();
     this.router.navigate(['/login']);
   }
-
 }
