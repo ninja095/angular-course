@@ -14,7 +14,6 @@ import {TimeAgoPipe} from "../../../helpers/pipes/time-ago.pipe";
   standalone: true,
   imports: [
     AvatarCircleComponent,
-    DatePipe,
     SvgIconComponent,
     PostInputComponent,
     CommentComponent,
