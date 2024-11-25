@@ -1,7 +1,8 @@
 import {inject, Injectable, signal} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Post, PostCreateDto} from "../interfaces/post.interface";
+import {CommentCreateDto, Post, PostCreateDto} from "../interfaces/post.interface";
 import {switchMap, tap} from "rxjs";
+import {Comment} from "@angular/compiler";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class PostService {
       .pipe(
         tap(res => this.posts.set(res))
       )
+  }
+
+  createComment(payload: CommentCreateDto) {
+    return this.#http.post<Comment>(`${this.baseUrl}comment/`, payload)
   }
 }

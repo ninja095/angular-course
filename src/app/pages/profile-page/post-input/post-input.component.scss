@@ -24,3 +24,8 @@
     transform: scale(1.1);
     background: var(--btn-hover-color);
 }
+
+:host.comment-input {
+  border: 1px dashed var(--border-color);
+  border-radius: 4px;
+}
