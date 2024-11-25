@@ -11,7 +11,7 @@
         {{ comment.author.username }}
       </span>
       <span class="medium-text">
-        {{ comment.createdAt | date: 'HH:MM dd.MM.YYYY' }}
+        {{ comment.createdAt | timeAgo }}
       </span>
     </header>
     <p class="medium-text">{{ comment.text }}</p>
