@@ -14,10 +14,10 @@ export interface Post {
   images: string[],
   createdAt: string,
   updatedAt: string,
-  comments: Comments[],
+  comments: PostComments[],
 }
 
-export interface Comments {
+export interface PostComments {
   id: number,
   text: string,
   author: {

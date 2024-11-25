@@ -25,14 +25,17 @@
     </div>
 
     <div class="post__comments-wrapper">
-      @for (comment of post.comments; track comment.id) {
+      @for (comment of comments(); track comment.id) {
         <app-comment [comment]="comment"></app-comment>
       }
     </div>
 
     <app-post-input
+      (createComment)="onCreateComment()"
       [postId]="post.id"
       [commentId]="post.comments.length > 0 ? post.comments[0].id : 0"
-      [isCommentInput]="true"></app-post-input>
+      [isCommentInput]="true"
+    >
+    </app-post-input>
   </main>
 }
