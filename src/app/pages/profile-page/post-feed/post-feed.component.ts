@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, inject, Renderer2} from '@angular/core';
+import {Component, ElementRef, inject, Renderer2} from '@angular/core';
 import {PostInputComponent} from "../post-input/post-input.component";
 import {PostComponent} from "../post/post.component";
 import {PostService} from "../../../data/services/post.service";
@@ -22,24 +22,15 @@ export class PostFeedComponent {
   feed = this.postService.posts;
   private destroy$ = new Subject<void>();
 
-  @HostListener('window:resize') onResize() {
-    console.log('resize');
-    this.ngAfterViewInit();
-  }
-
   constructor() {
     firstValueFrom(this.postService.fetchPosts());
-    this.listenToResize();
   }
 
   ngAfterViewInit() {
     this.resizeFeed();
-  }
-
-  private listenToResize() {
     fromEvent(window, 'resize')
       .pipe(
-        debounceTime(200),
+        debounceTime(100),
         takeUntil(this.destroy$)
       )
       .subscribe(() => {
