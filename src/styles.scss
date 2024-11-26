@@ -18,6 +18,8 @@
   --dark-hover-color: #414242;
   --btn-hover-color: #B08BF3FF;
 
+  --light-border: 1px solid var(--color-border);
+
   --svg-icon-width: 20px;
   --svg-icon-height: 20px;
   --breakpoint-xs: 0;
@@ -70,7 +72,7 @@ body {
   font-family: 'JetBrains Mono', sans-serif;
   font-size: 16px;
   color: var(--light-color);
-  background-image: url('/assets/images/background-fullhd.jpg');
+  background-image: url('../public/assets/images/background-fullhd.jpg');
 }
 
 .skill-tag {
