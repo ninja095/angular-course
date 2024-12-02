@@ -1,7 +1,6 @@
 import {Component, inject, input, OnInit, signal} from '@angular/core';
 import {Post, PostComments} from "../../../data/interfaces/post.interface";
 import {AvatarCircleComponent} from "../../../common-ui/avatar-circle/avatar-circle.component";
-import {DatePipe} from "@angular/common";
 import {SvgIconComponent} from "../../../common-ui/svg-icon/svg-icon.component";
 import {PostInputComponent} from "../post-input/post-input.component";
 import {CommentComponent} from "./comment/comment.component";
@@ -17,7 +16,7 @@ import {TimeAgoPipe} from "../../../helpers/pipes/time-ago.pipe";
     SvgIconComponent,
     PostInputComponent,
     CommentComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
@@ -34,5 +33,9 @@ export class PostComponent implements OnInit{
   async onCreateComment() {
     const comments = await firstValueFrom(this.postService.getCommentsByPostId(this.post()!.id))
     this.comments.set(comments);
+  }
+
+  async onDeletePost(postId: number) {
+    await firstValueFrom(this.postService.deletePost(postId));
   }
 }

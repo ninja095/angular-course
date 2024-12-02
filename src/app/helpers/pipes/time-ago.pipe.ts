@@ -17,11 +17,13 @@ export class TimeAgoPipe implements PipeTransform {
   transform(value: Date | string | number): string {
     if (!value) return 'Invalid date';
 
-    const date = new Date(value);
-    if (isNaN(date.getTime())) return 'Invalid date';
+    const utcDate = new Date(value);
+    if (isNaN(utcDate.getTime())) return 'Invalid date';
+
+    const localDate = new Date(utcDate.getTime() - utcDate.getTimezoneOffset() * 60000);
 
     const now = new Date();
-    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    const seconds = Math.floor((now.getTime() - localDate.getTime()) / 1000);
 
     if (seconds < 60) return `${seconds} ${this.getDeclension(seconds, ['секунда', 'секунды', 'секунд'])} назад`;
     const minutes = Math.floor(seconds / 60);

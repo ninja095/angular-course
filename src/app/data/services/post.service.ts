@@ -37,4 +37,18 @@ export class PostService {
         map(post => post.comments)
       )
   }
+
+  deletePost(postId: number) {
+    return this.#http.delete<Post>(`${this.baseUrl}post/${postId}`)
+      .pipe(
+        switchMap(() => this.fetchPosts())
+      )
+  }
+
+  editPost(postId: number, payload: PostCreateDto) {
+    return this.#http.patch<Post>(`${this.baseUrl}post/${postId}`, payload)
+      .pipe(
+        switchMap(() => this.fetchPosts())
+      )
+  }
 }
