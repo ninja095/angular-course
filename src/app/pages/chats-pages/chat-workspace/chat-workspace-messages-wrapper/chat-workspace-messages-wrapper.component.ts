@@ -1,8 +1,8 @@
-import {Component, inject, input, signal} from '@angular/core';
+import {Component, inject, input} from '@angular/core';
 import {ChatWorkspaceMessagesComponent} from "./chat-workspace-messages/chat-workspace-messages.component";
 import {MessageInputComponent} from "../../../../common-ui/message-input/message-input.component";
 import {ChatsService} from "../../../../data/services/chats.service";
-import {ChatsInterface, Message} from "../../../../data/interfaces/chats.interface";
+import {ChatsInterface} from "../../../../data/interfaces/chats.interface";
 import {firstValueFrom} from "rxjs";
 
 @Component({
@@ -20,16 +20,11 @@ export class ChatWorkspaceMessagesWrapperComponent {
 
   chat = input.required<ChatsInterface>();
 
-  messages = signal<Message[]>([]);
-
-  ngOnInit() {
-    this.messages.set(this.chat().messages);
-  }
+  messages = this.chatsService.activeChat
 
   async onSendMessage(message: string) {
     await firstValueFrom(this.chatsService.sendMessage(this.chat().id, message));
-    const chat = await firstValueFrom(this.chatsService.getChatById(this.chat().id));
+    await firstValueFrom(this.chatsService.getChatById(this.chat().id));
 
-    this.messages.set(chat.messages);
   }
 }
