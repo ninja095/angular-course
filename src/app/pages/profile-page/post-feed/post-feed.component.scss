@@ -1,5 +1,10 @@
+:host {
+  overflow-y: scroll;
+}
+
 .post-feed__wrapper {
   display: grid;
   grid-gap: 16px;
+  margin-top: 15px;
   overflow-y: scroll;
 }

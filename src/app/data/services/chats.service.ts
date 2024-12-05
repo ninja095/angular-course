@@ -32,6 +32,7 @@ export class ChatsService {
 
         this.activeChat.set(patchedMessages);
         console.log('patchedMessages длина', patchedMessages.length);
+        console.log('patchedMessages', patchedMessages);
         return {
           ...chat,
           companion: chat.userFirst.id === this.me()!.id ? chat.userSecond : chat.userFirst,
@@ -52,4 +53,5 @@ export class ChatsService {
       }
     });
   }
+
 }

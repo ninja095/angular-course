@@ -1,4 +1,5 @@
 :host {
+  height: clamp(100px, max-content, 200px);
   display: grid;
   grid-gap: 12px;
   grid-template-columns: 32px 1fr 44px;
@@ -9,6 +10,7 @@
 }
 
 .hidden-textarea {
+  max-height: 160px;
   resize: none;
   border: none;
   background: var(--dark-color);

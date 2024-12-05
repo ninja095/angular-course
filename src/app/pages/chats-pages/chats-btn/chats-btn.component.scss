@@ -5,9 +5,10 @@
   border-bottom: var(--light-border);
   padding: 24px 20px;
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 32px 280px;
   grid-gap: 16px;
   cursor: pointer;
+
 }
 
 :host:hover,
@@ -22,6 +23,7 @@
   gap: 16px;
   text-align: left;
   color: var(--light-color);
+  overflow: hidden;
 }
 
 .chat-user {
