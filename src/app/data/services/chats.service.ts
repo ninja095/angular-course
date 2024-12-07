@@ -11,7 +11,7 @@ export class ChatsService {
   http = inject(HttpClient);
   me = inject(ProfileService).me;
 
-  activeChat = signal<Message[]>([]);
+  activeChatMessages = signal<Message[]>([]);
 
   baseUrl = 'https://icherniakov.ru/yt-course';
   chatUrl = `${this.baseUrl}/chat/`;
@@ -30,8 +30,7 @@ export class ChatsService {
           isMyMessage: message.userFromId === this.me()!.id
         }));
 
-        this.activeChat.set(patchedMessages);
-        console.log('patchedMessages длина', patchedMessages.length);
+        this.activeChatMessages.set(patchedMessages);
         console.log('patchedMessages', patchedMessages);
         return {
           ...chat,
