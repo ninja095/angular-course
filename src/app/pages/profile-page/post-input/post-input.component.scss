@@ -9,8 +9,10 @@
 }
 
 .hidden-textarea {
+  outline:none;
   resize: none;
   border: none;
+  max-height: 70px;
   background: var(--dark-color);
   color: var(--light-color);
 

@@ -1,9 +1,9 @@
-import {Component, computed, inject, input} from '@angular/core';
+import {AfterViewInit, Component, computed, ElementRef, inject, input, ViewChild} from '@angular/core';
 import {ChatWorkspaceMessagesComponent} from "./chat-workspace-messages/chat-workspace-messages.component";
 import {MessageInputComponent} from "../../../../common-ui/message-input/message-input.component";
 import {ChatsService} from "../../../../data/services/chats.service";
 import {ChatsInterface, Message} from "../../../../data/interfaces/chats.interface";
-import {firstValueFrom, Subject, takeUntil, timer} from "rxjs";
+import {firstValueFrom, Subject} from "rxjs";
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
@@ -15,7 +15,9 @@ import {firstValueFrom, Subject, takeUntil, timer} from "rxjs";
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss'
 })
-export class ChatWorkspaceMessagesWrapperComponent {
+export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit {
+  @ViewChild('messagesContent') messagesContent!: ElementRef;
+
   chatsService = inject(ChatsService);
 
   destroy$ = new Subject<void>();
@@ -40,20 +42,16 @@ export class ChatWorkspaceMessagesWrapperComponent {
     return Object.entries(grouped)
   });
 
-  constructor() {
-    this.startMessagesPolling();
+  constructor() {}
+
+  private scrollToBottom(): void {
+    const element = this.messagesContent.nativeElement;
+    element.scrollTop = element.scrollHeight;
   }
 
-  private startMessagesPolling() {
-    timer(0, 60000)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(async () => {
-        console.log(this.groupedMessages());
-      await firstValueFrom(this.chatsService.getChatById(this.chat().id));
-
-    });
+  ngAfterViewInit(): void {
+    this.scrollToBottom();
   }
-
 
   getDateLabel(dateString: string): string {
     const today = new Date();
@@ -78,5 +76,6 @@ export class ChatWorkspaceMessagesWrapperComponent {
   async onSendMessage(message: string) {
     await firstValueFrom(this.chatsService.sendMessage(this.chat().id, message));
     await firstValueFrom(this.chatsService.getChatById(this.chat().id));
+    this.scrollToBottom();
   }
 }

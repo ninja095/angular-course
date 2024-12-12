@@ -10,14 +10,15 @@
   margin-bottom: 10px;
 
   .message-text {
-    padding: 8px 16px;
+    max-width: 250px;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 8px;
     background: var(--primary-color);
     font-weight: 500;
     color: var(--light-color);
     width: min-content;
-    mask: linear-gradient(#000 0%, #000 0%), linear-gradient(-135deg, #000 50%, #0000 0) border-box 100% 100% / 200% 200% no-repeat;
-    mask-composite: exclude;
-    mask-position: 10% 94%;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
   }
 
   .message-container{
@@ -27,13 +28,25 @@
 }
 
 .message-text {
+  max-width: 250px;
+  word-wrap: break-word;
+  white-space: normal;
+  padding: 8px;
   margin-bottom: 10px;
-  padding: 8px 16px;
   background: var(--message-color);
   font-weight: 500;
   color: var(--light-color);
   width: min-content;
-  mask: linear-gradient(#000 0%, #000 0%), linear-gradient(-135deg, #000 50%, #0000 0) border-box 100% 100% / 200% 200% no-repeat;
-  mask-composite: exclude;
-  mask-position: 10% 94%;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+}
+
+.post__actions-menu {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
 }

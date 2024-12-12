@@ -1,8 +1,8 @@
 :host {
   height: 100%;
-  display: flex;
-  flex-flow: nowrap column;
-  //grid-template-rows: 1fr minmax(100px, 200px);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(1, 1fr);
   padding: 16px 20px;
   overflow: hidden;
 }
@@ -16,10 +16,22 @@
 .messages-content {
   height: 100%;
   width: calc(100% + 17px);
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-right: 17px;
 }
 
 .message-input-wrapper {
-  flex: 1 1 auto;
+  //flex: 1 1 auto;
 }
+
+.date-separator {
+  margin: auto;
+  text-align: center;
+  padding: 4px;
+  width: 111px;
+  height: 28px;;
+  border-radius: 1px;
+  background: var(--dark-active-color);
+  color: var(--light-color);
+}
+

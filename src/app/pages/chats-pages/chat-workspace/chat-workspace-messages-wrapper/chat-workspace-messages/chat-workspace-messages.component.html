@@ -10,6 +10,13 @@
       {{ message.user?.lastName }}
      <span>{{ message.createdAt | date: 'HH:mm'}}</span>
     </strong>
+    <button
+      type="button"
+      class="post__actions-menu"
+      (click)="onDeleteChatMessage(message.id)"
+    >
+      <svg icon="delete" class="svg16"></svg>
+    </button>
     <div class="message-text medium-text">{{ message.text }}</div>
   </div>
 }

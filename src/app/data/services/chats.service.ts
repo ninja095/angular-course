@@ -31,7 +31,6 @@ export class ChatsService {
         }));
 
         this.activeChatMessages.set(patchedMessages);
-        console.log('patchedMessages', patchedMessages);
         return {
           ...chat,
           companion: chat.userFirst.id === this.me()!.id ? chat.userSecond : chat.userFirst,
@@ -53,4 +52,14 @@ export class ChatsService {
     });
   }
 
+  deleteChatMessage(message_id: number) {
+    return this.http.delete(`${this.messageUrl}${message_id}`).pipe(
+      map(() => {
+        const updatedMessages = this.activeChatMessages().filter(
+          message => message.id !== message_id
+        );
+        this.activeChatMessages.set(updatedMessages);
+      })
+    )
+  }
 }
