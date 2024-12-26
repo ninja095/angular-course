@@ -1,0 +1,45 @@
+@if (post(); as post) {
+<app-avatar-circle class="size32" [avatarUrl]="post.author.avatarUrl">
+</app-avatar-circle>
+
+<main class="post-body">
+  <div class="post-header">
+    <strong class="post__author">
+      {{ post.author.firstName }}
+      {{ post.author.lastName }}
+      <span class="post-created-at">
+        {{ post.createdAt | timeAgo }}
+      </span>
+    </strong>
+    <button
+      type="button"
+      class="post__actions-menu"
+      (click)="onDeletePost(post.id)"
+    >
+      <svg icon="delete" class="svg16"></svg>
+    </button>
+  </div>
+  <p class="medium-text">{{ post.content }}</p>
+
+  <div class="post-counters">
+    <span class="comment-amount">
+      <svg icon="comment" class="svg16"></svg>
+      <span class="comments-length">{{ post.comments.length }}</span>
+    </span>
+  </div>
+
+  <div class="post__comments-wrapper">
+    @for (comment of comments(); track comment.id) {
+    <app-comment [comment]="comment"></app-comment>
+    }
+  </div>
+
+  <app-post-input
+    (createComment)="onCreateComment()"
+    [postId]="post.id"
+    [commentId]="post.comments.length > 0 ? post.comments[0].id : 0"
+    [isCommentInput]="true"
+  >
+  </app-post-input>
+</main>
+}
