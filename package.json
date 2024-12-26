@@ -1,12 +1,12 @@
 {
-  "name": "tiktalk-course",
+  "name": "angular-course",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "nx run angular-course:serve",
+    "build": "nx build",
+    "watch": "nx build --watch --configuration development",
+    "test": "nx test"
   },
   "private": true,
   "dependencies": {
@@ -27,8 +27,17 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.0",
+    "@angular-devkit/core": "^18.2.0",
+    "@angular-devkit/schematics": "^18.2.0",
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
+    "@nx/angular": "20.3.0",
+    "@nx/js": "20.3.0",
+    "@nx/workspace": "20.3.0",
+    "@schematics/angular": "^18.2.0",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
@@ -36,6 +45,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nx": "20.3.0",
+    "prettier": "^2.6.2",
     "typescript": "~5.5.2"
   }
 }
