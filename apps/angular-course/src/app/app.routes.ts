@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
-import { LayoutComponent } from './common-ui/layout/layout.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { chatsRoutes } from './pages/chats-pages/chatsRoutes';
+import { LoginPageComponent } from '../../../../libs/auth/src/lib/feature-login/login-page/login-page.component';
+import { SearchPageComponent } from '../../../../libs/profile/src/lib/feature-profile-list/search-page/search-page.component';
+import { LayoutComponent } from '../../../../libs/common-ui/src/lib/layout/layout.component';
+import { SettingsPageComponent } from '../../../../libs/profile/src/lib/feature-profile-settings/settings-page/settings-page.component';
+import { chatsRoutes } from '../../../../libs/chats/src/lib/feature-chats-workspace/chats-pages/chatsRoutes';
 import { canActivateAuth } from '@ac/auth';
 import { ProfilePageComponent } from '@ac/profile';
 

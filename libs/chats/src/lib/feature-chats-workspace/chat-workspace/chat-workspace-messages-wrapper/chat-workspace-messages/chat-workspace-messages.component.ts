@@ -1,5 +1,5 @@
 import { Component, HostBinding, inject, input } from '@angular/core';
-import { Message } from '../../../../../../../../../libs/chats/src/lib/data/interfaces/chats.interface';
+import { Message } from '../../../../data/interfaces/chats.interface';
 import { DatePipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
