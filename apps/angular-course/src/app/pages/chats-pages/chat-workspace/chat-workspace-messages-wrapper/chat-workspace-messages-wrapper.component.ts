@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { ChatWorkspaceMessagesComponent } from './chat-workspace-messages/chat-workspace-messages.component';
 import { MessageInputComponent } from '../../../../common-ui/message-input/message-input.component';
-import { ChatsService } from '../../../../data/services/chats.service';
 import {
   ChatsInterface,
   Message,
-} from '../../../../data/interfaces/chats.interface';
+} from '../../../../../../../../libs/chats/src/lib/data/interfaces/chats.interface';
 import { firstValueFrom, Subject } from 'rxjs';
+import { ChatsService } from '@ac/chats';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',

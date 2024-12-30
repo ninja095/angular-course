@@ -1,9 +1,9 @@
 import { Component, HostBinding, inject, input } from '@angular/core';
-import { Message } from '../../../../../data/interfaces/chats.interface';
+import { Message } from '../../../../../../../../../libs/chats/src/lib/data/interfaces/chats.interface';
 import { DatePipe } from '@angular/common';
-import { ChatsService } from '../../../../../data/services/chats.service';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
+import { ChatsService } from '@ac/chats';
 
 @Component({
   selector: 'app-chat-workspace-messages',
