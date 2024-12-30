@@ -4,7 +4,7 @@ import {
   ChatsInterface,
   LastMessage,
   Message,
-} from '../interfaces/chats.interface';
+} from '@ac/interfaces/chats/chats.interface';
 import { map } from 'rxjs';
 import { ProfileService } from '@ac/profile';
 

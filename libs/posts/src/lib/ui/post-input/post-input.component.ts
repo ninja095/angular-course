@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
 import { PostService } from '../../data';
-import { ProfileService } from '@ac/profile';
+import { GlobalStoreService } from '@ac/shared';
 
 @Component({
   selector: 'app-post-input',
@@ -26,7 +26,7 @@ export class PostInputComponent {
   isCommentInput = input<boolean>(false);
   postId = input<number>(0);
   commentId = input<number>(0);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
 
   @Output() createComment = new EventEmitter<void>();
 

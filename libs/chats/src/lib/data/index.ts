@@ -1,4 +1,4 @@
-import { ChatsInterface } from './interfaces/chats.interface';
+import { ChatsInterface } from '@ac/interfaces/chats/chats.interface';
 import { ChatsService } from './services/chats.service';
 
 export {

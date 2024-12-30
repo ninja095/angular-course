@@ -12,7 +12,7 @@ import { MessageInputComponent } from '../../../ui/message-input/message-input.c
 import {
   ChatsInterface,
   Message,
-} from '../../../data/interfaces/chats.interface';
+} from '@ac/interfaces/chats/chats.interface';
 import { firstValueFrom, Subject } from 'rxjs';
 import { ChatsService } from '@ac/chats';
 
