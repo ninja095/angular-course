@@ -1,14 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
-import { ProfileService } from '../../data/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
-import { PostFeedComponent } from '../../../../../../libs/posts/src/lib/feature-posts-wall/post-feed/post-feed.component';
 import { ChatsService } from '../../data/services/chats.service';
+import { PostFeedComponent } from '@ac/posts';
+import { ImgUrlPipe, SvgIconComponent } from '@ac/common-ui';
+import { ProfileService } from '@ac/profile';
 
 @Component({
   selector: 'app-profile-page',

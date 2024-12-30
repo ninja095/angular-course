@@ -1,7 +1,4 @@
 import { Component, ElementRef, inject, Renderer2 } from '@angular/core';
-import { PostInputComponent } from '../../ui/post-input/post-input.component';
-import { PostComponent } from '../post/post.component';
-import { PostService } from '../../../../../../apps/angular-course/src/app/data/services/post.service';
 import {
   debounceTime,
   firstValueFrom,
@@ -9,6 +6,9 @@ import {
   Subject,
   takeUntil,
 } from 'rxjs';
+import { PostService } from '../../data';
+import { PostInputComponent } from '../../ui';
+import { PostComponent } from '@ac/posts';
 
 @Component({
   selector: 'app-post-feed',

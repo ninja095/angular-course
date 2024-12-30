@@ -1,1 +1,1 @@
-export * from './lib/posts/posts.component';
+export * from './lib/feature-posts-wall';

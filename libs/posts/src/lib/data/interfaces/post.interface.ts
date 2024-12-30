@@ -1,4 +1,4 @@
-import { Profile } from './profile.interface';
+import { Profile } from '@ac/profile';
 
 export interface PostCreateDto {
   title: string;

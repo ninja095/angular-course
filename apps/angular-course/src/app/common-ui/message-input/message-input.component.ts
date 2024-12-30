@@ -5,10 +5,9 @@ import {
   Output,
   Renderer2,
 } from '@angular/core';
-import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 import { FormsModule } from '@angular/forms';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
-import { ProfileService } from '../../data/services/profile.service';
+import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
+import { ProfileService } from '@ac/profile';
 
 @Component({
   selector: 'app-message-input',

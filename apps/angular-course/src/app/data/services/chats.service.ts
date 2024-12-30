@@ -5,8 +5,8 @@ import {
   LastMessage,
   Message,
 } from '../interfaces/chats.interface';
-import { ProfileService } from './profile.service';
 import { map } from 'rxjs';
+import { ProfileService } from '@ac/profile';
 
 @Injectable({
   providedIn: 'root',
