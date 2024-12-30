@@ -1,12 +1,12 @@
 import { Component, inject, input, OnInit, signal } from '@angular/core';
-import { Post, PostComments } from '../../../data/interfaces/post.interface';
-import { AvatarCircleComponent } from '../../../common-ui/avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
-import { PostInputComponent } from '../post-input/post-input.component';
+import { Post, PostComments } from '../../../../../../apps/angular-course/src/app/data/interfaces/post.interface';
+import { AvatarCircleComponent } from '../../../../../../apps/angular-course/src/app/common-ui/avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../../../../../../apps/angular-course/src/app/common-ui/svg-icon/svg-icon.component';
+import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { CommentComponent } from './comment/comment.component';
-import { PostService } from '../../../data/services/post.service';
+import { PostService } from '../../../../../../apps/angular-course/src/app/data/services/post.service';
 import { firstValueFrom } from 'rxjs';
-import { TimeAgoPipe } from '../../../helpers/pipes/time-ago.pipe';
+import { TimeAgoPipe } from '../../../../../../apps/angular-course/src/app/helpers/pipes/time-ago.pipe';
 
 @Component({
   selector: 'app-post',

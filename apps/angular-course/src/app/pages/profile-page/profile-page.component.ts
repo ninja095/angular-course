@@ -7,7 +7,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
-import { PostFeedComponent } from './post-feed/post-feed.component';
+import { PostFeedComponent } from '../../../../../../libs/posts/src/lib/feature-posts-wall/post-feed/post-feed.component';
 import { ChatsService } from '../../data/services/chats.service';
 
 @Component({

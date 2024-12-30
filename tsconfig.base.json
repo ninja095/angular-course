@@ -19,7 +19,8 @@
     "module": "ES2022",
     "lib": ["ES2022", "dom"],
     "paths": {
-      "auth": ["libs/auth/src/index.ts"]
+      "@ac/auth": ["libs/auth/src/index.ts"],
+      "@ac/posts": ["libs/posts/src/index.ts"]
     },
     "baseUrl": ".",
     "rootDir": "."
