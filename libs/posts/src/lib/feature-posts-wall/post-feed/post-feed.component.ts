@@ -8,7 +8,7 @@ import {
 } from 'rxjs';
 import { PostService } from '../../data';
 import { PostInputComponent } from '../../ui';
-import { PostComponent } from '@ac/posts';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-post-feed',

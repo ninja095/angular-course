@@ -3,7 +3,8 @@ import { Message } from '@ac/interfaces/chats/chats.interface';
 import { DatePipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
-import { ChatsService } from '@ac/chats';
+import { ChatsService } from '../../../../data';
+
 
 @Component({
   selector: 'app-chat-workspace-messages',

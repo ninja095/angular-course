@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -20,7 +20,7 @@ import { ProfileService } from '@ac/profile';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent implements OnInit{
+export class SidebarComponent {
   profileService = inject(ProfileService);
   subscribers$ = this.profileService.getSubscribers();
 
@@ -32,11 +32,8 @@ export class SidebarComponent implements OnInit{
     { label: 'Поиск', icon: 'search', link: 'search' },
   ];
 
-  async ngOnInit() {
-    try {
-      await firstValueFrom(this.profileService.getMe());
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-    }
+  ngOnInit() {
+      firstValueFrom(this.profileService.getMe());
+
   }
 }

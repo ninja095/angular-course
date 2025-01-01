@@ -14,7 +14,7 @@ import {
   Message,
 } from '@ac/interfaces/chats/chats.interface';
 import { firstValueFrom, Subject } from 'rxjs';
-import { ChatsService } from '@ac/chats';
+import { ChatsService } from '../../../data';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
