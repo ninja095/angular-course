@@ -5,9 +5,9 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { PostFeedComponent } from '@ac/posts';
 import { ImgUrlPipe, SvgIconComponent } from '@ac/common-ui';
-import { ProfileService } from '@ac/profile';
 
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
+import { ProfileService } from '../../data';
 
 @Component({
   selector: 'app-profile-page',

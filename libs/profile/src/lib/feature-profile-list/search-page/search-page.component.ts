@@ -1,7 +1,10 @@
+'use strict';
+
 import { Component, inject } from '@angular/core';
 import { ProfileCardComponent } from '../../ui/profile-card/profile-card.component';
+import { Store } from '@ngrx/store';
+import { selectFilteredProfiles } from '../../data';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
-import { ProfileService } from '@ac/profile';
 
 @Component({
   selector: 'app-search-page',
@@ -11,9 +14,11 @@ import { ProfileService } from '@ac/profile';
   styleUrl: './search-page.component.scss',
 })
 export class SearchPageComponent {
-  title = 'angular-course';
-  profileService = inject(ProfileService);
-  profiles = this.profileService.filteredProfiles;
 
-  constructor() {}
+  store = inject(Store);
+  profiles = this.store.selectSignal(selectFilteredProfiles);
+
+  constructor() {
+    console.log('SearchPageComponent profiles', this.profiles());
+  }
 }

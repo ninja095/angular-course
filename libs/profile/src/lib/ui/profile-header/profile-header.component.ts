@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { ProfileService } from '@ac/profile';
 import { AvatarCircleComponent } from '@ac/common-ui';
 import { Profile } from '@ac/interfaces/profile';
+import { ProfileService } from '../../data';
 
 @Component({
   selector: 'app-profile-header',

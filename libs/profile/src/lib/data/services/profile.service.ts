@@ -14,7 +14,6 @@ export class ProfileService {
   constructor() {}
 
   me = signal<Profile | null>(null);
-  filteredProfiles = signal<Profile[]>([]);
 
   getTestAccounts() {
     return this.http.get<Profile[]>(`${this.baseUrl}account/test_accounts`);
@@ -56,6 +55,5 @@ export class ProfileService {
   getFilteredProfiles(params: Record<string, any>) {
     return this.http
       .get<Pageble<Profile>>(`${this.baseUrl}account/accounts`, { params })
-      .pipe(tap((response) => this.filteredProfiles.set(response.items)));
   }
 }
