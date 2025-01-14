@@ -18,16 +18,16 @@ export class PostService {
 
   posts = signal<Post[]>([]);
 
-  createPost(payload: PostCreateDto) {
-    return this.#http
-      .post<Post>(`${this.baseUrl}post/`, payload)
-      .pipe(switchMap(() => this.fetchPosts()));
-  }
-
   fetchPosts() {
     return this.#http
       .get<Post[]>(`${this.baseUrl}post/`)
       .pipe(tap((res) => this.posts.set(res)));
+  }
+
+  createPost(payload: PostCreateDto) {
+    return this.#http
+      .post<Post>(`${this.baseUrl}post/`, payload)
+      .pipe(switchMap(() => this.fetchPosts()));
   }
 
   createComment(payload: CommentCreateDto) {

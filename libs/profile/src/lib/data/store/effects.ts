@@ -15,7 +15,6 @@ export class ProfileEffects {
     return this.actions$.pipe(
       ofType(profileActions.filterEvents),
       switchMap(({ filters }) => {
-        console.log('profileReducer state after:', filters);
         return this.profileService.getFilteredProfiles(filters);
       }),
       map(res => profileActions.profileLoaded({ profiles: res.items }))

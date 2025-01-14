@@ -19,6 +19,5 @@ export class SearchPageComponent {
   profiles = this.store.selectSignal(selectFilteredProfiles);
 
   constructor() {
-    console.log('SearchPageComponent profiles', this.profiles());
   }
 }

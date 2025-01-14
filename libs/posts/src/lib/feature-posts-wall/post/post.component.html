@@ -24,18 +24,17 @@
   <div class="post-counters">
     <span class="comment-amount">
       <svg icon="comment" class="svg16"></svg>
-      <span class="comments-length">{{ post.comments.length }}</span>
+      <span class="comments-length">{{ comments2()?.length ?? 0 }}</span>
     </span>
   </div>
 
   <div class="post__comments-wrapper">
-    @for (comment of comments(); track comment.id) {
+    @for (comment of comments2(); track comment.id) {
     <app-comment [comment]="comment"></app-comment>
     }
   </div>
 
   <app-post-input
-    (createComment)="onCreateComment()"
     [postId]="post.id"
     [commentId]="post.comments.length > 0 ? post.comments[0].id : 0"
     [isCommentInput]="true"

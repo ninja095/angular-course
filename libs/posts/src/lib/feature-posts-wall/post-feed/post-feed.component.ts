@@ -1,14 +1,14 @@
-import { Component, ElementRef, inject, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import {
   debounceTime,
-  firstValueFrom,
   fromEvent,
   Subject,
   takeUntil,
 } from 'rxjs';
-import { PostService } from '../../data';
 import { PostInputComponent } from '../../ui';
 import { PostComponent } from '../post/post.component';
+import { Store } from '@ngrx/store';
+import { PostActions, selectAllPosts } from '../../data';
 
 @Component({
   selector: 'app-post-feed',
@@ -17,16 +17,16 @@ import { PostComponent } from '../post/post.component';
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
 })
-export class PostFeedComponent {
-  postService = inject(PostService);
+export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
   hostElement = inject(ElementRef);
   r2 = inject(Renderer2);
+  store = inject(Store);
 
-  feed = this.postService.posts;
+  feed = this.store.selectSignal(selectAllPosts);
   private destroy$ = new Subject<void>();
 
-  constructor() {
-    firstValueFrom(this.postService.fetchPosts());
+  ngOnInit() {
+    this.store.dispatch(PostActions.fetchPosts());
   }
 
   ngAfterViewInit() {

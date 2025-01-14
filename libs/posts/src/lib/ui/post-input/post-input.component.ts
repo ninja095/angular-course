@@ -8,10 +8,10 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
-import { PostService } from '../../data';
 import { GlobalStoreService } from '@ac/shared';
+import { Store } from '@ngrx/store';
+import { PostActions } from '../../data';
 
 @Component({
   selector: 'app-post-input',
@@ -22,7 +22,7 @@ import { GlobalStoreService } from '@ac/shared';
 })
 export class PostInputComponent {
   r2 = inject(Renderer2);
-  postService = inject(PostService);
+  store = inject(Store)
   isCommentInput = input<boolean>(false);
   postId = input<number>(0);
   commentId = input<number>(0);
@@ -46,28 +46,30 @@ export class PostInputComponent {
     if (!this.postText) return;
 
     if (this.isCommentInput()) {
-      firstValueFrom(
-        this.postService.createComment({
-          text: this.postText,
-          authorId: this.profile()!.id,
-          postId: this.postId(),
-          commentId: this.commentId(),
+      this.store.dispatch(
+         PostActions.createComments({
+          payload: {
+            text: this.postText,
+            authorId: this.profile()!.id,
+            postId: this.postId(),
+            commentId: this.commentId(),
+          }
         })
-      ).then(() => {
-        this.postText = '';
-        this.createComment.emit();
-      });
+      );
+      this.postText = '';
+      this.createComment.emit();
       return;
     }
 
-    firstValueFrom(
-      this.postService.createPost({
-        title: 'Отличный пост',
-        content: this.postText,
-        authorId: this.profile()!.id,
+    this.store.dispatch(
+      PostActions.createPost({
+        payload: {
+          title: 'Отличный пост',
+          content: this.postText,
+          authorId: this.profile()!.id,
+        }
       })
-    ).then(() => {
-      this.postText = '';
-    });
+    );
+    this.postText = '';
   }
 }

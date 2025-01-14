@@ -17,7 +17,6 @@ export const profileFeature = createFeature({
   reducer: createReducer(
     initialState,
     on(profileActions.profileLoaded, (state: ProfileState, payload ) => {
-      console.log('profileReducer state after:', state);
       return {
         ...state,
         profile: payload.profiles
