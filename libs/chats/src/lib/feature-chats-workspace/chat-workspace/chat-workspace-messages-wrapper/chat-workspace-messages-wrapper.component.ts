@@ -4,8 +4,8 @@ import {
   computed,
   ElementRef,
   inject,
-  input,
-  ViewChild,
+  input, OnInit,
+  ViewChild
 } from '@angular/core';
 import { ChatWorkspaceMessagesComponent } from './chat-workspace-messages/chat-workspace-messages.component';
 import { MessageInputComponent } from '../../../ui/message-input/message-input.component';
@@ -23,7 +23,7 @@ import { ChatsService } from '../../../data';
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
 })
-export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit {
+export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit, OnInit{
   @ViewChild('messagesContent') messagesContent!: ElementRef;
 
   chatsService = inject(ChatsService);
@@ -32,6 +32,7 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit {
   chat = input.required<ChatsInterface>();
 
   messages = this.chatsService.activeChatMessages;
+  // messages = signal<Message[]>([]);
 
   groupedMessages = computed(() => {
     const grouped = this.messages().reduce((acc, message) => {
@@ -55,7 +56,9 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit {
     return Object.entries(grouped);
   });
 
-  constructor() {}
+  ngOnInit(): void {
+    // this.messages.set(this.chat().messages);
+  }
 
   private scrollToBottom(): void {
     const element = this.messagesContent.nativeElement;
@@ -86,11 +89,17 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit {
   //     });
   // }
 
-  async onSendMessage(message: string) {
-    await firstValueFrom(
-      this.chatsService.sendMessage(this.chat().id, message)
+  async onSendMessage(text: string): Promise<void> {
+    this.chatsService.wsAdapter.sendMessage(
+      text,
+      this.chat().id,
     );
-    await firstValueFrom(this.chatsService.getChatById(this.chat().id));
+    // await firstValueFrom(
+    //   this.chatsService.sendMessage(this.chat().id, message)
+    // );
+
+    const chat = await firstValueFrom(this.chatsService.getChatById(this.chat().id));
+    this.messages.set(chat.messages);
     this.scrollToBottom();
   }
 }

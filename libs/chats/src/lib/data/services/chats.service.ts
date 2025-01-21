@@ -5,21 +5,58 @@ import {
   LastMessage,
   Message,
 } from '@ac/interfaces/chats/chats.interface';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ProfileService } from '@ac/profile';
+import { ChatWSMessageInterface } from '../interfaces/chat-ws-message.interface';
+import { ChatWsServiceInterface } from '../interfaces/chat-ws-service.interface';
+import { AuthService } from '@ac/auth';
+import { ChatWsRxjsService } from './chat-ws-rxjs.service';
+import { isNewMessageTypeGuard, isUnreadMessageTypeGuard } from '../interfaces/type-guard';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatsService {
   http = inject(HttpClient);
+  #authService = inject(AuthService);
   me = inject(ProfileService).me;
+
+  wsAdapter: ChatWsServiceInterface = new ChatWsRxjsService()
 
   activeChatMessages = signal<Message[]>([]);
 
   baseUrl = 'https://icherniakov.ru/yt-course';
   chatUrl = `${this.baseUrl}/chat/`;
   messageUrl = `${this.baseUrl}/message/`;
+
+  connectWebSocket() {
+    return this.wsAdapter.connect({
+      url: `${this.chatUrl}ws`,
+      token: this.#authService.token ?? '',
+      handleMessage: this.handleWSMessage,
+    }) as Observable<ChatWSMessageInterface>
+  }
+
+  handleWSMessage = (message: ChatWSMessageInterface)=> {
+    console.log('message: ', message);
+    if (!('action' in message)) return;
+    if (isUnreadMessageTypeGuard(message)) {
+      // todo вынести выше в app компоонент чтобы на старте проверять
+    }
+    if (isNewMessageTypeGuard(message)) {
+      this.activeChatMessages.set([
+        ...this.activeChatMessages(),
+        {
+          id: message.data.id,
+          userFromId: message.data.author,
+          personalChatId: message.data.chat_id,
+          text: message.data.message,
+          createdAt: message.data.created_at,
+          isRead: false,
+          isMyMessage: false,
+        }]);
+    }
+  }
 
   getMyChats() {
     return this.http.get<LastMessage[]>(`${this.chatUrl}get_my_chats/`);

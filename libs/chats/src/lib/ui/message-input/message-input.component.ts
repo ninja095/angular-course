@@ -20,9 +20,9 @@ export class MessageInputComponent {
   r2 = inject(Renderer2);
   me = inject(ProfileService).me;
 
-  @Output() createComment = new EventEmitter<string>();
+  @Output() createMessage = new EventEmitter<string>();
 
-  postText = '';
+  messageText = '';
 
   onTextareaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement;
@@ -30,10 +30,10 @@ export class MessageInputComponent {
     this.r2.setStyle(textarea, 'height', textarea.scrollHeight + 'px');
   }
 
-  createPost() {
-    if (!this.postText) return;
+  onCreateMessage() {
+    if (!this.messageText) return;
 
-    this.createComment.emit(this.postText);
-    this.postText = '';
+    this.createMessage.emit(this.messageText);
+    this.messageText = '';
   }
 }

@@ -1,10 +1,14 @@
 :host {
+  overflow-y: scroll;
   height: 100%;
   display: block;
   border-right: var(--light-border);
 }
 
 .chat-filter-input__wrapper {
+  position: sticky;
+  top: 0;
   padding: 16px 20px;
   border-bottom: var(--light-border);
+  background-color: black;
 }
