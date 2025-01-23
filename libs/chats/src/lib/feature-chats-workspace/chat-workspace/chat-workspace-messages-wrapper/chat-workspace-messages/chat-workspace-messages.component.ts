@@ -22,6 +22,10 @@ export class ChatWorkspaceMessagesComponent {
     return this.message().isMyMessage;
   }
 
+  ngOnInit() {
+    console.log('is my message: ',this.message())
+  }
+
   async onDeleteChatMessage(message_id: number) {
     console.log('message_id', message_id);
     await firstValueFrom(this.chatsService.deleteChatMessage(message_id));

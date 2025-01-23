@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, firstValueFrom, tap, throwError } from 'rxjs';
 import { TokenResponse } from './auth.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -56,6 +56,11 @@ export class AuthService {
       );
   }
 
+  async refreshTokenIfNeeded(): Promise<void> {
+    if (!this.isAuth) {
+      await firstValueFrom(this.refreshTokens());
+    }
+  }
   public logout() {
     this.token = null;
     this.refreshToken = null;

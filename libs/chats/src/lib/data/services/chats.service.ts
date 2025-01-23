@@ -5,13 +5,14 @@ import {
   LastMessage,
   Message,
 } from '@ac/interfaces/chats/chats.interface';
-import { map, Observable } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { ProfileService } from '@ac/profile';
 import { ChatWSMessageInterface } from '../interfaces/chat-ws-message.interface';
 import { ChatWsServiceInterface } from '../interfaces/chat-ws-service.interface';
 import { AuthService } from '@ac/auth';
 import { ChatWsRxjsService } from './chat-ws-rxjs.service';
 import { isNewMessageTypeGuard, isUnreadMessageTypeGuard } from '../interfaces/type-guard';
+import { Profile } from '@ac/interfaces/profile';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,11 @@ export class ChatsService {
     }) as Observable<ChatWSMessageInterface>
   }
 
+  async reconnectWithRefreshToken() {
+    await firstValueFrom(this.#authService.refreshTokens());
+    this.connectWebSocket();
+  }
+
   handleWSMessage = (message: ChatWSMessageInterface)=> {
     console.log('message: ', message);
     if (!('action' in message)) return;
@@ -53,7 +59,11 @@ export class ChatsService {
           text: message.data.message,
           createdAt: message.data.created_at,
           isRead: false,
-          isMyMessage: false,
+          user:
+            message.userFirst.id === message.data.author
+              ? chat.userFirst
+              : chat.userSecond,
+          isMyMessage: message.data.author === this.me()!.id,
         }]);
     }
   }

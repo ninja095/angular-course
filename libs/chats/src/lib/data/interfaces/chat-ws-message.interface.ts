@@ -1,3 +1,5 @@
+import { Profile } from '@ac/interfaces/profile';
+
 export interface ChatWSMessageBaseInterface {
   status: 'success' | 'error';
 }
@@ -17,6 +19,9 @@ export interface ChatWSNewMessageInterface extends ChatWSMessageBaseInterface {
     chat_id: number;
     created_at: string;
     author: number;
+    isMyMessage: boolean,
+    isRead: boolean,
+    user?: Profile;
   }
 }
 

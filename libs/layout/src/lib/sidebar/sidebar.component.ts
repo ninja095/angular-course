@@ -25,6 +25,7 @@ export class SidebarComponent {
   subscribers$ = this.profileService.getSubscribers();
 
   me = this.profileService.me;
+  // unreadMessagesCount$ = this.profileService.getUnreadMessagesCount();
 
   menuItems = [
     { label: 'Моя страница', icon: 'home', link: 'profile/me' },
