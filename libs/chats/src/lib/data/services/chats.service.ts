@@ -12,7 +12,6 @@ import { ChatWsServiceInterface } from '../interfaces/chat-ws-service.interface'
 import { AuthService } from '@ac/auth';
 import { ChatWsRxjsService } from './chat-ws-rxjs.service';
 import { isNewMessageTypeGuard, isUnreadMessageTypeGuard } from '../interfaces/type-guard';
-import { Profile } from '@ac/interfaces/profile';
 
 @Injectable({
   providedIn: 'root',
@@ -43,28 +42,36 @@ export class ChatsService {
     this.connectWebSocket();
   }
 
-  handleWSMessage = (message: ChatWSMessageInterface)=> {
+  handleWSMessage = async (message: ChatWSMessageInterface)=> {
     console.log('message: ', message);
     if (!('action' in message)) return;
     if (isUnreadMessageTypeGuard(message)) {
       // todo вынести выше в app компоонент чтобы на старте проверять
     }
     if (isNewMessageTypeGuard(message)) {
-      this.activeChatMessages.set([
-        ...this.activeChatMessages(),
-        {
+
+      const chat = await firstValueFrom(this.getChatById(message.data.chat_id));
+
+      const isMessageExists = this.activeChatMessages().some(
+        (msg) => msg.id === message.data.id
+      );
+
+      if (!isMessageExists) {
+        const newMessage: Message = {
           id: message.data.id,
           userFromId: message.data.author,
           personalChatId: message.data.chat_id,
           text: message.data.message,
           createdAt: message.data.created_at,
           isRead: false,
-          user:
-            message.userFirst.id === message.data.author
-              ? chat.userFirst
-              : chat.userSecond,
           isMyMessage: message.data.author === this.me()!.id,
-        }]);
+          user: chat.userFirst.id === message.data.author
+            ? chat.userFirst
+            : chat.userSecond,
+        };
+
+        this.activeChatMessages.set([...this.activeChatMessages(), newMessage]);
+      }
     }
   }
 
