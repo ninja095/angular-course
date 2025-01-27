@@ -99,3 +99,20 @@
   height: 13px;
   color: var(--primary-color);
 }
+
+.unread-messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  height: 18px;
+  background-color: var(--primary-color);
+
+  .unread-messages-count {
+    align-items: center;
+    color: var(--dark-color);
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 700;
+  }
+}

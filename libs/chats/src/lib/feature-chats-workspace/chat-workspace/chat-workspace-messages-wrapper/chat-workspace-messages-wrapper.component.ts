@@ -32,7 +32,6 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit, OnI
   chat = input.required<ChatsInterface>();
 
   messages = this.chatsService.activeChatMessages;
-  // messages = signal<Message[]>([]);
 
   groupedMessages = computed(() => {
     const grouped = this.messages().reduce((acc, message) => {
@@ -57,7 +56,6 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit, OnI
   });
 
   ngOnInit(): void {
-    // this.messages.set(this.chat().messages);
   }
 
   private scrollToBottom(): void {
@@ -81,25 +79,14 @@ export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit, OnI
     if (isYesterday) return 'Вчера';
     return date.toLocaleDateString();
   }
-  // private autoSendMessage() {
-  //   timer(0, 10000)
-  //     .pipe(takeUntil(this.destroy$))
-  //     .subscribe(() => {
-  //       this.onSendMessage('Automated message');
-  //     });
-  // }
+
 
   async onSendMessage(text: string): Promise<void> {
     this.chatsService.wsAdapter.sendMessage(
       text,
       this.chat().id,
     );
-    // await firstValueFrom(
-    //   this.chatsService.sendMessage(this.chat().id, message)
-    // );
-
-    const chat = await firstValueFrom(this.chatsService.getChatById(this.chat().id));
-    this.messages.set(chat.messages);
+    // await firstValueFrom(this.chatsService.getChatById(this.chat().id));
     this.scrollToBottom();
   }
 }

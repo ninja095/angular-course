@@ -21,9 +21,7 @@ export class ChatWorkspaceMessagesComponent {
   get isMine() {
     return this.message().isMyMessage;
   }
-
   async onDeleteChatMessage(message_id: number) {
-    console.log('message_id', message_id);
     await firstValueFrom(this.chatsService.deleteChatMessage(message_id));
   }
 }

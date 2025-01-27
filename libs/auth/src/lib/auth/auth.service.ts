@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, tap, throwError } from 'rxjs';
+import { catchError, firstValueFrom, tap, throwError } from 'rxjs';
 import { TokenResponse } from './auth.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -50,6 +50,7 @@ export class AuthService {
       .pipe(
         tap((response) => this.saveTokens(response)),
         catchError((error) => {
+          console.error('Ошибка обновления токена:', error);
           this.logout();
           return throwError(error);
         })

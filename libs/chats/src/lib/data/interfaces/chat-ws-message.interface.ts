@@ -1,12 +1,12 @@
+import { Profile } from '@ac/interfaces/profile';
+
 export interface ChatWSMessageBaseInterface {
   status: 'success' | 'error';
 }
 
 export interface ChatWSUnreadMessageInterface extends ChatWSMessageBaseInterface {
   action: 'unread';
-  data: {
-    count: number;
-  };
+  data: { count: number; };
 }
 
 export interface ChatWSNewMessageInterface extends ChatWSMessageBaseInterface {
@@ -17,6 +17,9 @@ export interface ChatWSNewMessageInterface extends ChatWSMessageBaseInterface {
     chat_id: number;
     created_at: string;
     author: number;
+    isMyMessage: boolean,
+    isRead: boolean,
+    user?: Profile;
   }
 }
 

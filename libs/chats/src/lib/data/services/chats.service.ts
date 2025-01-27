@@ -5,7 +5,7 @@ import {
   LastMessage,
   Message,
 } from '@ac/interfaces/chats/chats.interface';
-import { map, Observable } from 'rxjs';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { ProfileService } from '@ac/profile';
 import { ChatWSMessageInterface } from '../interfaces/chat-ws-message.interface';
 import { ChatWsServiceInterface } from '../interfaces/chat-ws-service.interface';
@@ -24,6 +24,7 @@ export class ChatsService {
   wsAdapter: ChatWsServiceInterface = new ChatWsRxjsService()
 
   activeChatMessages = signal<Message[]>([]);
+  unreadMessagesCount = signal<number>(0);
 
   baseUrl = 'https://icherniakov.ru/yt-course';
   chatUrl = `${this.baseUrl}/chat/`;
@@ -37,24 +38,41 @@ export class ChatsService {
     }) as Observable<ChatWSMessageInterface>
   }
 
-  handleWSMessage = (message: ChatWSMessageInterface)=> {
+  handleWSMessage = async (message: ChatWSMessageInterface)=> {
     console.log('message: ', message);
+
     if (!('action' in message)) return;
+
     if (isUnreadMessageTypeGuard(message)) {
-      // todo вынести выше в app компоонент чтобы на старте проверять
+      this.unreadMessagesCount.set(message.data.count);
     }
+
     if (isNewMessageTypeGuard(message)) {
-      this.activeChatMessages.set([
-        ...this.activeChatMessages(),
-        {
+      const activeChatId = this.activeChatMessages()?.[0]?.personalChatId;
+      if (message.data.chat_id !== activeChatId) return;
+
+      const chat = await firstValueFrom(this.getChatById(message.data.chat_id));
+
+      const isMessageExists = this.activeChatMessages().some(
+        (msg) => msg.id === message.data.id
+      );
+
+      if (!isMessageExists) {
+        const newMessage: Message = {
           id: message.data.id,
           userFromId: message.data.author,
           personalChatId: message.data.chat_id,
           text: message.data.message,
           createdAt: message.data.created_at,
           isRead: false,
-          isMyMessage: false,
-        }]);
+          isMyMessage: message.data.author === this.me()!.id,
+          user: chat.userFirst.id === message.data.author
+            ? chat.userFirst
+            : chat.userSecond,
+        };
+
+        this.activeChatMessages.set([...this.activeChatMessages(), newMessage]);
+      }
     }
   }
 

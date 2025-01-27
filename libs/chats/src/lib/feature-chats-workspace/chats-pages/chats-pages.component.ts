@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
-import { ChatsService } from '@ac/chats';
+
 
 @Component({
   selector: 'app-chats-pages',
@@ -10,10 +10,6 @@ import { ChatsService } from '@ac/chats';
   templateUrl: './chats-pages.component.html',
   styleUrl: './chats-pages.component.scss',
 })
-export class ChatsPagesComponent implements OnInit {
-  #chatService = inject(ChatsService);
+export class ChatsPagesComponent {
 
-  ngOnInit() {
-    this.#chatService.connectWebSocket().subscribe();
-  }
 }
