@@ -1,4 +1,4 @@
-import { Profile } from '@ac/interfaces/profile';
+import { Profile } from '../../profile';
 
 export interface ChatWSMessageBaseInterface {
   status: 'success' | 'error';

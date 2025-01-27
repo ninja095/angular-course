@@ -3,7 +3,8 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
-import { profileActions, ProfileService } from '../../data';
+import { profileActions } from '../../data';
+import { ProfileService } from '@ac/data-access';
 
 @Component({
   selector: 'app-profile-filters',

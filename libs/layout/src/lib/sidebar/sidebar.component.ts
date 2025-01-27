@@ -4,11 +4,9 @@ import { SubscriberCardComponent } from './subscriber-card/subscriber-card.compo
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { ImgUrlPipe, SvgIconComponent } from '@ac/common-ui';
-import { ProfileService } from '@ac/profile';
-import { ChatsService } from '@ac/chats';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '@ac/auth';
-import { isErrorMessageTypeGuard } from '../../../../chats/src/lib/data/interfaces/type-guard';
+import { ChatsService, ProfileService } from '@ac/data-access';
 
 @Component({
   selector: 'app-sidebar',

@@ -1,4 +1,4 @@
-import { Profile } from '@ac/interfaces/profile';
+import { Profile } from 'libs/data-access/src/lib/profile';
 import {  createFeature, createReducer, on } from '@ngrx/store';
 import { profileActions } from './actions';
 

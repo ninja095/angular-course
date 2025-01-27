@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PostService } from '../sevices/post.service';
+import { PostService } from '../../../../../data-access/src/lib/posts/sevices/post.service';
 import { PostActions } from './post.actions';
 import { map, switchMap, tap } from 'rxjs';
 

@@ -2,7 +2,7 @@ import {
   ChatWSMessageInterface,
   ChatWSNewMessageInterface,
   ChatWSUnreadMessageInterface
-} from './chat-ws-message.interface';
+} from '../interfaces/chat-ws-message.interface';
 
 
 export function isUnreadMessageTypeGuard(message: ChatWSMessageInterface): message is ChatWSUnreadMessageInterface {
