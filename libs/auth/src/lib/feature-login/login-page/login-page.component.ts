@@ -6,8 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth';
-
+import { AuthService } from '@ac/data-access';
 @Component({
   selector: 'app-login-page',
   standalone: true,

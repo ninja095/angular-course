@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {
+  AuthService,
   ChatsInterface,
   ChatWSMessageInterface,
   ChatWsRxjsService,
@@ -12,7 +13,6 @@ import {
 } from '@ac/data-access';
 import { firstValueFrom, map, Observable } from 'rxjs';
 
-import { AuthService } from '@ac/auth';
 import { ProfileService } from '@ac/data-access';
 
 @Injectable({
