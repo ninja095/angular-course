@@ -1,8 +1,9 @@
 import { Component, computed, inject, input, OnInit, Signal } from '@angular/core';
-import { Post, PostActions, PostComments, selectPostComments } from '../../data';
+import {  PostActions, selectPostComments } from '../../data';
 import { CommentComponent, PostInputComponent } from '../../ui';
 import { AvatarCircleComponent, SvgIconComponent, TimeAgoPipe } from '@ac/common-ui';
 import { Store } from '@ngrx/store';
+import { Post, PostComments } from '@ac/data-access';
 
 @Component({
   selector: 'app-post',

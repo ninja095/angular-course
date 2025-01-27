@@ -9,12 +9,9 @@ import {
 } from '@angular/core';
 import { ChatWorkspaceMessagesComponent } from './chat-workspace-messages/chat-workspace-messages.component';
 import { MessageInputComponent } from '../../../ui/message-input/message-input.component';
-import {
-  ChatsInterface,
-  Message,
-} from '@ac/interfaces/chats/chats.interface';
-import { firstValueFrom, Subject } from 'rxjs';
-import { ChatsService } from '../../../data';
+
+import { Subject } from 'rxjs';
+import { ChatsInterface, ChatsService, Message } from '@ac/data-access';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',

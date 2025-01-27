@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import { PostComments } from '../../data';
 import { AvatarCircleComponent, TimeAgoPipe } from '@ac/common-ui';
+import { PostComments } from '@ac/data-access';
 
 @Component({
   selector: 'app-comment',

@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
-import { GlobalStoreService } from '@ac/shared';
 import { Store } from '@ngrx/store';
 import { PostActions } from '../../data';
+import { GlobalStoreService } from '@ac/data-access';
 
 @Component({
   selector: 'app-post-input',

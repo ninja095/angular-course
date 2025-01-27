@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { LastMessage } from '@ac/interfaces/chats/chats.interface';
+import { LastMessage } from '../../../../../data-access/src/lib/chats/interfaces/chats.interface';
 import { AvatarCircleComponent } from '@ac/common-ui';
 
 @Component({

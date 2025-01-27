@@ -1,9 +1,8 @@
 import { Component, HostBinding, inject, input } from '@angular/core';
-import { Message } from '@ac/interfaces/chats/chats.interface';
 import { DatePipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent, SvgIconComponent } from '@ac/common-ui';
-import { ChatsService } from '../../../../data';
+import { ChatsService, Message } from '@ac/data-access';
 
 
 @Component({

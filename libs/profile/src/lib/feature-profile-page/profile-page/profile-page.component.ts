@@ -7,8 +7,7 @@ import { PostFeedComponent } from '@ac/posts';
 import { ImgUrlPipe, SvgIconComponent } from '@ac/common-ui';
 
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
-import { ProfileService } from '../../data';
-
+import { ProfileService } from '@ac/data-access';
 @Component({
   selector: 'app-profile-page',
   standalone: true,
