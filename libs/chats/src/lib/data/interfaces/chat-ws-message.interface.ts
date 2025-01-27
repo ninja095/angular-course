@@ -6,9 +6,7 @@ export interface ChatWSMessageBaseInterface {
 
 export interface ChatWSUnreadMessageInterface extends ChatWSMessageBaseInterface {
   action: 'unread';
-  data: {
-    count: number;
-  };
+  data: { count: number; };
 }
 
 export interface ChatWSNewMessageInterface extends ChatWSMessageBaseInterface {

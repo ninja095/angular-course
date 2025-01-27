@@ -24,6 +24,7 @@ export class ChatsService {
   wsAdapter: ChatWsServiceInterface = new ChatWsRxjsService()
 
   activeChatMessages = signal<Message[]>([]);
+  unreadMessagesCount = signal<number>(0);
 
   baseUrl = 'https://icherniakov.ru/yt-course';
   chatUrl = `${this.baseUrl}/chat/`;
@@ -37,18 +38,18 @@ export class ChatsService {
     }) as Observable<ChatWSMessageInterface>
   }
 
-  async reconnectWithRefreshToken() {
-    await firstValueFrom(this.#authService.refreshTokens());
-    this.connectWebSocket();
-  }
-
   handleWSMessage = async (message: ChatWSMessageInterface)=> {
     console.log('message: ', message);
+
     if (!('action' in message)) return;
+
     if (isUnreadMessageTypeGuard(message)) {
-      // todo вынести выше в app компоонент чтобы на старте проверять
+      this.unreadMessagesCount.set(message.data.count);
     }
+
     if (isNewMessageTypeGuard(message)) {
+      const activeChatId = this.activeChatMessages()?.[0]?.personalChatId;
+      if (message.data.chat_id !== activeChatId) return;
 
       const chat = await firstValueFrom(this.getChatById(message.data.chat_id));
 

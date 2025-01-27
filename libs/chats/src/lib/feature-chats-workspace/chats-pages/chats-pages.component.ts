@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
-import { ChatsService } from '@ac/chats';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -13,11 +11,5 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './chats-pages.component.scss',
 })
 export class ChatsPagesComponent {
-  #chatService = inject(ChatsService);
 
-  constructor() {
-    this.#chatService.connectWebSocket()
-      .pipe(takeUntilDestroyed())
-      .subscribe();
-  }
 }

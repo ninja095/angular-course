@@ -50,17 +50,13 @@ export class AuthService {
       .pipe(
         tap((response) => this.saveTokens(response)),
         catchError((error) => {
+          console.error('Ошибка обновления токена:', error);
           this.logout();
           return throwError(error);
         })
       );
   }
 
-  async refreshTokenIfNeeded(): Promise<void> {
-    if (!this.isAuth) {
-      await firstValueFrom(this.refreshTokens());
-    }
-  }
   public logout() {
     this.token = null;
     this.refreshToken = null;
