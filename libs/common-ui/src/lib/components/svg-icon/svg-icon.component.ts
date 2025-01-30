@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'svg[icon]',
@@ -13,6 +13,7 @@ import { Component, Input, ElementRef, Renderer2, OnInit } from '@angular/core';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SvgIconComponent implements OnInit {
   @Input() icon = '';

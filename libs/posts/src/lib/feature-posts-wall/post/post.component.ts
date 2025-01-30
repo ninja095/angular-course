@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, OnInit, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, OnInit, Signal } from '@angular/core';
 import {  PostActions, selectPostComments } from '../../data';
 import { CommentComponent, PostInputComponent } from '../../ui';
 import { AvatarCircleComponent, SvgIconComponent, TimeAgoPipe } from '@ac/common-ui';
@@ -17,6 +17,7 @@ import { Post, PostComments } from '@ac/data-access';
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent implements OnInit {
   store = inject(Store);

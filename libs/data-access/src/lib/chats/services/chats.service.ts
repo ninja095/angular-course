@@ -60,6 +60,8 @@ export class ChatsService {
       );
 
       if (!isMessageExists) {
+        const me = this.me();
+        if (!me || !chat) return;
         const newMessage: Message = {
           id: message.data.id,
           userFromId: message.data.author,
@@ -67,7 +69,7 @@ export class ChatsService {
           text: message.data.message,
           createdAt: message.data.created_at,
           isRead: false,
-          isMyMessage: message.data.author === this.me()!.id,
+          isMyMessage: message.data.author === me.id,
           user: chat.userFirst.id === message.data.author
             ? chat.userFirst
             : chat.userSecond,

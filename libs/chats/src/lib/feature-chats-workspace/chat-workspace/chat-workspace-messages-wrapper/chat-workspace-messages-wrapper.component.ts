@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
@@ -19,6 +19,7 @@ import { ChatsInterface, ChatsService, Message } from '@ac/data-access';
   imports: [ChatWorkspaceMessagesComponent, MessageInputComponent],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatWorkspaceMessagesWrapperComponent implements AfterViewInit, OnInit{
   @ViewChild('messagesContent') messagesContent!: ElementRef;

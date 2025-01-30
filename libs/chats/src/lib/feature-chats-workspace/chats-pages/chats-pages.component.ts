@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ChatsListComponent } from '../chats-list/chats-list.component';
 
@@ -9,6 +9,7 @@ import { ChatsListComponent } from '../chats-list/chats-list.component';
   imports: [RouterOutlet, ChatsListComponent],
   templateUrl: './chats-pages.component.html',
   styleUrl: './chats-pages.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsPagesComponent {
 

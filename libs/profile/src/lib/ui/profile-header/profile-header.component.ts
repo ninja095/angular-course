@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { AvatarCircleComponent } from '@ac/common-ui';
@@ -10,9 +10,9 @@ import { Profile, ProfileService } from '@ac/data-access';
   imports: [AvatarCircleComponent, AsyncPipe],
   templateUrl: './profile-header.component.html',
   styleUrl: './profile-header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileHeaderComponent {
-  // profile = input<Profile>();
   profileService = inject(ProfileService);
   profile$ = toObservable(this.profileService.me);
   @Input() profile!: Profile;

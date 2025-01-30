@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { LastMessage } from '../../../../../data-access/src/lib/chats/interfaces/chats.interface';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { LastMessage } from '@ac/data-access';
 import { AvatarCircleComponent } from '@ac/common-ui';
 
 @Component({
@@ -8,6 +8,7 @@ import { AvatarCircleComponent } from '@ac/common-ui';
   imports: [AvatarCircleComponent],
   templateUrl: './chats-btn.component.html',
   styleUrl: './chats-btn.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsBtnComponent {
   chat = input<LastMessage>();
