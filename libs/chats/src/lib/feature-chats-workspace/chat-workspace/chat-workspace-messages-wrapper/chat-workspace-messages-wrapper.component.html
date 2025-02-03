@@ -4,12 +4,13 @@
     <div class="date-separator">
       {{ group[0] }}
     </div>
-    @for (message of group[1]; track message.id) {
-    <app-chat-workspace-messages
-      [message]="message"
-    ></app-chat-workspace-messages>
+      @for (message of group[1]; track message.id) {
+      <app-chat-workspace-messages
+        [message]="message"
+      ></app-chat-workspace-messages>
 
-    } }
+      }
+    }
   </div>
 </div>
 

@@ -1,0 +1,9 @@
+@if (avatarUrl(); as avatarUrl) { @if (avatarUrl) {
+<img [src]="avatarUrl | imgUrl" alt="" />
+} @else {
+<img
+  class="avatar-placeholder"
+  src="/apps/angular-course/src/assets/images/avatar-placeholder.png"
+  alt="avatar"
+/>
+} }
