@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { TtInputComponent } from '@ac/common-ui';
+import { DaDataService } from '../../data/services/daData.service';
+import { debounceTime, switchMap } from 'rxjs';
 
 @Component({
   selector: 'lib-address-input',
   standalone: true,
-  imports: [CommonModule, TtInputComponent, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './address-input.component.html',
   styleUrl: './address-input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +21,17 @@ import { TtInputComponent } from '@ac/common-ui';
 })
 export class AddressInputComponent implements ControlValueAccessor {
 
+  #daDataService = inject(DaDataService);
+
   innerSearchControl = new FormControl();
+
+  suggestions$ = this.innerSearchControl.valueChanges
+    .pipe(
+      debounceTime(500),
+      switchMap(val => {
+        return this.#daDataService.getSuggestions(val);
+      })
+  );
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
