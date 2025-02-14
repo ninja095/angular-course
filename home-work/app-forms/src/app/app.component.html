@@ -1,0 +1,179 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+  <h1>Информация о доставке</h1>
+
+  <div class="user-info">
+    <label>
+      Тип получателя
+      <select formControlName="receiverType">
+        <option [value]="ReceiverType.PERSON">Физическое лицо</option>
+        <option [value]="ReceiverType.COMPANY">Юридическое лицо</option>
+      </select>
+    </label>
+
+    <label>
+      Имя
+      @if (form.controls.name.touched && form.controls.name.hasError('nameExists')) {
+        <small class="error" style="color: darkred"> {{form.controls.name.getError('nameExists')?.message}}</small>
+      }
+      @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+        <small class="error" style="color: darkred"> обязательное поле</small>
+    }
+      <input
+        type="text"
+        placeholder="Введите ваше имя"
+        formControlName="name"
+      >
+      @if (form.controls.name.touched && form.controls.name.hasError('startsWith')) {
+        <small class="error" style="color: darkred"> {{form.controls.name.getError('startsWith')?.message}}</small>
+      }
+<!--      <small class="error"> обязательное поле</small>-->
+    </label>
+
+    @if (form.controls.receiverType.value === ReceiverType.COMPANY) {
+      <label>
+        ИНН
+        <input
+          type="text"
+          placeholder="Введите ваш ИНН"
+          formControlName="tin"
+        >
+      </label>
+    } @else {
+      <label>
+        Фамилия
+        <input
+          type="text"
+          placeholder="Введите вашу фамилию"
+          formControlName="lastName"
+        >
+      </label>
+    }
+  </div>
+
+  <div class="date-picker" formGroupName="dateRange">
+    <label>
+      Дата с:
+      <input type="date" formControlName="from">
+    </label>
+    <label>
+      Дата по:
+      <input type="date" formControlName="to">
+    </label>
+  </div>
+  @if (form.controls.dateRange && form.controls.dateRange.hasError('dateRange')) {
+    <small class="error" style="color: darkred"> {{form.controls.dateRange.getError('dateRange')?.message}}</small>
+  }
+
+  <div class="address-search" >
+    <h2>Адрес доставки</h2>
+    <button style="max-width: 160px; height: 45px; margin-top: 10px"
+            (click)="addAddress()"
+    >Добавить адрес</button>
+  </div>
+
+  @for (group of form.controls.addresses.controls; track group; let i = $index) {
+    <div class="user-building-info" [formGroup]="group">
+      <label class="dropdown">
+        Поиск адреса
+        <input
+          [formControl]="searchControl"
+          type="text"
+          placeholder="Введите адрес"
+          formControlName="search"
+        >
+        @if (suggestions$ | async; as suggestions){
+          @if (isDropdownOpened()) {
+            <div class="suggestions-dropdown">
+                @for (suggest of suggestions; track suggest) {
+                  <button
+                    (click)="onSuggestionPick(suggest)"
+                    class="suggest-btn"
+                  >
+                    {{ suggest.data.city }}
+                    {{ suggest.data.street }}
+                    {{ suggest.data.house }}
+                    {{ suggest.data.postal_code }}
+                  </button>
+                }
+            </div>
+          }
+        }
+      </label>
+
+      <label>
+        Город
+        <input
+          type="text"
+          placeholder="Введите ваш город"
+          formControlName="city"
+        >
+      </label>
+
+      <label>
+        Страна
+        <input
+          type="text"
+          placeholder="Введите вашу страну"
+          formControlName="country"
+        >
+      </label>
+
+      <label>
+        Почтовый индекс
+        <input
+          type="text"
+          placeholder="Введите ваш почтовый индекс"
+          formControlName="zip"
+        >
+      </label>
+
+      <label>
+        Улица
+        <input
+          type="text"
+          placeholder="Введите вашу улицу"
+          formControlName="street"
+        >
+      </label>
+
+      <label>
+        Дом
+        <input
+          type="text"
+          placeholder="Введите ваш дом"
+          formControlName="building"
+        >
+      </label>
+
+      <label>
+        Квартира
+        <input
+          type="text"
+          placeholder="Введите вашу квартиру"
+          formControlName="apartment"
+        >
+      </label>
+
+      <button style="margin-bottom: 15px; grid-column: 1/3;"
+              (click)="removeAddress(i)"
+      >Удалить адрес</button>
+    </div>
+  }
+
+  <div [formGroup]="form.controls.features" >
+    <h3>Дополнително</h3>
+    <div class="features" >
+      @for (control of form.controls.features.controls | keyvalue: sort; track control; let i = $index) {
+        <label>
+          {{ features[i].label }}
+          <input
+            type="checkbox"
+            [formControlName]="control.key"
+          >
+
+        </label>
+      }
+    </div>
+  </div>
+  <button type="submit">Submit</button>
+</form>

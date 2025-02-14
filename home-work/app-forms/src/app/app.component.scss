@@ -1,0 +1,177 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h4 {
+  margin: 20px 0 10px;
+  color: #555;
+}
+
+label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input.ng-invalid.ng-touched {
+  border-color: coral;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 20px;
+}
+
+.address-search {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+
+  input {
+    max-width: 150px;
+    height: 38px;
+  }
+}
+
+.user-building-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 20px;
+  align-items: start;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+.features {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.features label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-weight: normal;
+  color: #333;
+}
+
+.features input[type="checkbox"] {
+  width: 15px;
+  height:15px;
+  cursor: pointer;
+  accent-color: #007bff;
+}
+
+//.error {
+//  display: none;
+//}
+//
+//input.ng-invalid.ng-touched + .error {
+//  display: block;
+//  color: coral;
+//}
+
+.date-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  margin-top: 20px;
+  //margin-bottom: 20px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  grid-column: span 2;
+}
+
+.suggestions-dropdown {
+  display: flex;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 20px);
+  background: #fff;
+  padding: 10px;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid #ccc;
+}
+
+.suggest-btn {
+  background: none;
+  color: #333333;
+  border: none;
+  &:hover {
+    color: white;
+  }
+}
